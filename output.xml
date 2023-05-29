@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0.1 (Python 3.9.13 on win32)" generated="20230529 19:58:26.991" rpa="true" schemaversion="3">
+<suite id="s1" name="Tasks" source="c:\Users\frani\OneDrive\Pulpit\Certificate2\tasks.robot">
+<test id="s1-t1" name="Order robots from RobotSpareBin Industries Inc" line="15">
+<kw name="Open the robot order website">
+<kw name="Open Available Browser" library="RPA.Browser.Selenium">
+<arg>https://robotsparebinindustries.com/#/robot-order</arg>
+<doc>Attempts to open a browser on the user's device from a set of
+supported browsers. Automatically downloads a corresponding webdriver
+if none is already installed.</doc>
+<msg timestamp="20230529 19:58:28.975" level="INFO">Creating an instance of the Chrome WebDriver.</msg>
+<msg timestamp="20230529 19:58:28.990" level="INFO">Applicable driver not found; attempting to install with Selenium Manager (Beta)</msg>
+<msg timestamp="20230529 19:58:30.187" level="INFO">Created Chrome browser with arguments: --disable-dev-shm-usage --disable-web-security --allow-running-insecure-content --no-sandbox</msg>
+<msg timestamp="20230529 19:58:30.188" level="INFO" html="true">&lt;p&gt;Attempted combinations:&lt;/p&gt;&lt;div class="doc"&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Browser&lt;/th&gt;&lt;th&gt;Download&lt;/th&gt;&lt;th&gt;Error&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Chrome&lt;/td&gt;&lt;td&gt;False&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</msg>
+<msg timestamp="20230529 19:58:30.188" level="INFO">Opening url 'https://robotsparebinindustries.com/#/robot-order'</msg>
+<status status="PASS" starttime="20230529 19:58:28.971" endtime="20230529 19:58:30.987"/>
+</kw>
+<status status="PASS" starttime="20230529 19:58:28.968" endtime="20230529 19:58:30.988"/>
+</kw>
+<kw name="Get orders">
+<kw name="Download" library="RPA.HTTP">
+<arg>https://robotsparebinindustries.com/orders.csv</arg>
+<arg>overwrite=True</arg>
+<doc>An alias for the ``HTTP Get`` keyword.</doc>
+<msg timestamp="20230529 19:58:30.993" level="INFO">Creating a new HTTP session</msg>
+<msg timestamp="20230529 19:58:30.993" level="INFO">Creating Session using : alias=rpasession_alias.httpsrobotsparebinindustries.com, url=https://robotsparebinindustries.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20230529 19:58:30.991" endtime="20230529 19:58:31.485"/>
+</kw>
+<kw name="Read table from CSV" library="RPA.Tables">
+<var>@{orders}</var>
+<arg>orders.csv</arg>
+<arg>header=True</arg>
+<doc>Read a CSV file as a table.</doc>
+<msg timestamp="20230529 19:58:31.495" level="INFO">@{orders} = [ {'Order number': '1', 'Head': '1', 'Body': '2', 'Legs': '3', 'Address': 'Address 123'} | {'Order number': '2', 'Head': '4', 'Body': '1', 'Legs': '5', 'Address': 'Address 456'} | {'Order number': '3'...</msg>
+<status status="PASS" starttime="20230529 19:58:31.486" endtime="20230529 19:58:31.496"/>
+</kw>
+<status status="PASS" starttime="20230529 19:58:30.989" endtime="20230529 19:58:31.497"/>
+</kw>
+<kw name="Make an order">
+<for flavor="IN">
+<var>${order}</var>
+<value>@{orders}</value>
+<iter>
+<var name="${order}"/>
+<kw name="Log" library="BuiltIn">
+<arg>${order}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230529 19:58:31.501" endtime="20230529 19:58:31.502"/>
+</kw>
+<status status="NOT RUN" starttime="20230529 19:58:31.500" endtime="20230529 19:58:31.502"/>
+</iter>
+<status status="NOT RUN" starttime="20230529 19:58:31.499" endtime="20230529 19:58:31.503"/>
+</for>
+<status status="PASS" starttime="20230529 19:58:31.498" endtime="20230529 19:58:31.504"/>
+</kw>
+<status status="PASS" starttime="20230529 19:58:28.963" endtime="20230529 19:58:31.505"/>
+</test>
+<doc>Orders robots from RobotSpareBin Industries Inc.
+Saves the order HTML receipt as a PDF file.
+Saves the screenshot of the ordered robot.
+Embeds the screenshot of the robot to the PDF receipt.
+Creates ZIP archive of the receipts and the images.</doc>
+<status status="PASS" starttime="20230529 19:58:27.006" endtime="20230529 19:58:31.512"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tasks</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Tasks">Tasks</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
